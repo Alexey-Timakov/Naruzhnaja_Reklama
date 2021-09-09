@@ -91,12 +91,14 @@ document.addEventListener("DOMContentLoaded", function() {
             menu.classList.add("menu__wrapper_sticky");
         } else {
             menu.classList.remove("menu__wrapper_sticky");
+            mobileMenuBtn.classList.remove("menu-mobile__btn_sticky");
         }
         
         if (window.pageYOffset >= offsetMobileMenuBtn - 16) {
             mobileMenuBtn.classList.add("menu-mobile__btn_sticky");
         } else {
             mobileMenuBtn.classList.remove("menu-mobile__btn_sticky");
+            menu.classList.remove("menu__wrapper_sticky");
         }
     }
 
@@ -134,7 +136,8 @@ document.addEventListener("DOMContentLoaded", function() {
             sampleImagesList.forEach(function(item, index) {
                 let imageDiv = `<div class="image n${index} ${index == 0 ? "active":""}"
                 style="background-image: url(${sampleImagesList[index].url})"
-                data-index="${index}"></div>`;
+                data-index="${index}"
+                aria-label="Один из примеров нашей работы по производству рекламной продукции"></div>`;
                 sliderImages.innerHTML += imageDiv;
             })
             
@@ -145,7 +148,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (index <= sliderOptions.thumbnailsInRow - 1) {
                     let thumbnailDiv = `<div class="thumbnail n${index} ${index == 0 ? "active":""}"
                     style="background-image: url(${sampleImagesList[index].thumb})"
-                    data-index="${index}"></div>`
+                    data-index="${index}"
+                    aria-label="Уменьшенное изображение примера нашей работы. Нажмите для просмотра."
+                    tabindex=0></div>`
                     thumbnails.innerHTML +=thumbnailDiv;
                 }
             });
@@ -243,7 +248,9 @@ document.addEventListener("DOMContentLoaded", function() {
         function addNewThumbnail (number, position) {
             const elementToAdd = `<div class="thumbnail n${number} shown"
                 style="background-image: url(${sampleImagesList[number].thumb})"
-                data-index="${number}"></div>`;
+                data-index="${number}"
+                aria-label="Уменьшенное изображение примера нашей работы. Нажмите для просмотра."
+                tabindex=0></div>`;
                 thumbnails.insertAdjacentHTML(position, elementToAdd);
                 addClickEvent(thumbnails.querySelector(".n" + number));
                 activateThumbnail(number);
